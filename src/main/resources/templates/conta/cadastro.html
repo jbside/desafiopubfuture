@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}">
+<head>
+<meta charset="UTF-8" />
+</head>
+<body>
+
+	<section class="layout-content" layout:fragment="corpo">
+		<div class="page-header">
+			<nav class="navbar navbar-expand-md navbar-top bg-light">
+				<div class="collapse navbar-collapse" id="navbarsExampleDefault">
+					<ul class="navbar-nav">
+						<li class="nav-item active"><i class="oi oi-caret-right"></i>
+							<span>Cadastrar Conta</span></li>
+					</ul>
+				</div>
+				<a class="btn btn-primary btn-md" href="/aluno/lista" role="button">
+					<span class="oi oi-spreadsheet" title="Cadastro" aria-hidden="true"></span>
+					<span>Listar Contas</span>
+				</a>
+			</nav>
+		</div>
+
+		<div class="container" id="cadastro">
+
+			<div th:replace="fragments/alert"></div>
+
+			<form
+				th:action="${conta.id == null} ? @{/conta/salvar} : @{/conta/editar}"
+				th:object="${conta}" method="POST">
+
+				<div class="form-row">
+					<div class="form-group col-md-6">
+						<label for="Saldo">Saldo conta</label> <input type="text"
+							class="form-control" id="saldo" placeholder="Saldo"
+							autofocus="autofocus" th:field="*{saldo}">
+						<div class="invalid-feedback"></div>
+					</div>
+				</div>
+
+				<div class="form-row">
+					<div class="form-group col-md-6">
+						<label for="Instituicao Financeira">Instituição financeira</label> <input type="text"
+							class="form-control" id="instituicaoFinanceira" placeholder="Instituição"
+							autofocus="autofocus" th:field="*{instituicaoFinanceira}" />
+						<div class="invalid-feedback"></div>
+					</div>
+
+				</div>
+
+				<div class="form-row">
+					<div class="form-group col-md-6">
+						<label for="conta">Tipo de conta</label> 
+						<select id="tipoConta" class="form-control" th:field="*{tipoConta}">
+							<option value="Carteira">Carteira</option>
+							<option value="Corrente">Corrente</option>
+							<option value="Poupança">Poupança</option>
+						</select>
+						<div class="invalid-feedback"></div>
+					</div>
+				</div>
+
+				<input type="hidden" id="id" th:field="*{id}" />
+				<button type="submit" class="btn btn-primary btn-sm">Salvar</button>
+			</form>
+		</div>
+	</section>
+
+</body>
+</html>

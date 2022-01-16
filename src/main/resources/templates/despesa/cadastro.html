@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}">
+<head><meta charset="UTF-8"/></head>
+<body>
+	    <section class="layout-content" layout:fragment="corpo">
+	
+	        <nav class="navbar navbar-expand-md bg-light">
+	            <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+	                <ul class="navbar-nav mr-auto">
+	                    <li class="nav-item active">
+	                        <i class="oi oi-caret-right"></i>
+	                        <span>Cadastrar Despesa</span>
+	                    </li>
+	                </ul>
+	            </div>
+	            <a class="btn btn-primary btn-md" href="/despesa/lista" role="button">
+	                <span class="oi oi-spreadsheet" title="Cadastro" aria-hidden="true"></span>
+	                <span>Listar Receitas</span>
+	            </a>
+	        </nav>
+	
+	        <div class="container" id="cadastro">
+	        	<div th:replace="fragments/alert"></div>
+	            <form th:action="${despesa.id == null} ? @{/despesa/salvar} : @{/despesa/editar}" 
+	            	th:object="${despesa}" method="POST">
+	                <div class="form-row">
+	                    <div class="form-group col-md-6">
+	                        <label for="valor">Valor</label>
+	                        <input type="text" class="form-control" id="valor" placeholder="Valor despesa" autofocus= "autofocus" 
+	                               th:field="*{valor}">
+	                    </div>
+	                    
+  	                   
+					      <div class="form-group col-md-6">
+							<label for="conta">Conta</label> 
+							<select id="conta_despesa" class="form-control" th:field="*{conta_despesa}">
+								<option value="">Selecione...</option>
+								<option th:each="c : ${conta}" th:value="${c.id}" th:text="${c.id}"></option>
+							</select>
+							<div class="invalid-feedback"></div>
+	                      </div>                     
+                          
+	              </div>       
+	                    <div class="form-row">
+					<div class="form-group col-md-6">
+						<label for="data_pagamento">Data Pagamento:</label> <input type="date"
+							class="form-control" id="data_pagamento" th:field="*{data_pagamento}" />
+						<div class="invalid-feedback"></div>
+					</div>
+					<div class="form-group col-md-6">
+						<label for="data_pagamento_esperado">Data pagamento esperado:</label> <input type="date"
+							class="form-control" id="data_pagamento_esperado" th:field="*{data_pagamento_esperado}" />
+						<div class="invalid-feedback"></div>
+					</div>
+				     </div>
+				     
+				       <div class="form-row">
+				     <div class="form-group col-md-6">
+						<label for="conta">Tipo de Despesa</label> 
+						<select id="tipoDespesa" class="form-control" th:field="*{tipoDespesa}">
+							<option value="Alimentaçaõ">Alimentação</option>
+							<option value="Educação">Educação</option>
+							<option value="Lazer">Lazer</option>
+							<option value="Moradia">Moradia</option>
+							<option value="Roupa">Roupa</option>
+							<option value="Saúde">Saúde</option>
+							<option value="Transporte">Transporte</option>
+							<option value="Outros">Outros</option>
+						</select>
+						<div class="invalid-feedback"></div>
+					</div>
+			       </div>	
+			
+	               
+	                <input type="hidden" id="id" th:field="*{id}"/>
+	                <button type="submit" class="btn btn-primary btn-sm">Salvar</button>
+	            </form>
+	        </div>
+	    </section>
+</body>
+</html>	
